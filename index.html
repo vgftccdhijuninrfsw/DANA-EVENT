@@ -1,0 +1,180 @@
+<!doctype html>
+
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kirim TON via TON Connect</title>  <!-- TON Connect UI SDK -->  <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>  <style>
+    :root { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell; }
+    body { margin: 0; background: #0b0f1a; color: #f5f7ff; }
+    .wrap { max-width: 760px; margin: 40px auto; padding: 24px; }
+    .card { background: #121a2b; border: 1px solid #1f2a44; border-radius: 18px; padding: 22px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+    h1 { margin: 0 0 6px; font-size: 24px; }
+    p { line-height: 1.6; color: #cfd6ed; }
+    .grid { display: grid; grid-template-columns: 1fr 160px; gap: 12px; align-items: end; }
+    label { display: block; font-size: 13px; color: #9fb0d8; margin: 10px 0 6px; }
+    input[type="number"], input[type="text"] { width: 100%; padding: 12px 14px; background: #0e1526; color: #e8eeff; border: 1px solid #273453; border-radius: 12px; outline: none; }
+    input[type="number"]:focus, input[type="text"]:focus { border-color: #3a66ff; box-shadow: 0 0 0 3px rgba(58,102,255,.2); }
+    button { padding: 12px 16px; border-radius: 12px; border: 0; background: #3a66ff; color: white; font-weight: 600; cursor: pointer; }
+    button.secondary { background: #23315a; }
+    button:disabled{ opacity: .6; cursor: not-allowed; }
+    .sdk { margin: 16px 0; display: flex; gap: 8px; align-items: center; }
+    .muted { color: #93a4cf; font-size: 12px; }
+    .warn { color: #ffb4b4; font-weight: 600; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 13px; }
+    .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .tag { font-size: 11px; color: #9fb0d8; border: 1px solid #29324d; padding: 4px 8px; border-radius: 999px; }
+    .note { font-size: 12px; color: #cfd6ed; background: #0e1526; border: 1px dashed #2a3a61; padding: 10px 12px; border-radius: 12px; }
+    .ok { color: #b4ffd1; }
+    .err { color: #ffb4b4; }
+  </style></head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Kirim TON ke Wallet</h1>
+      <p>
+        Halaman ini memakai <b>TON Connect</b>. Tidak ada pengurasan otomatis: pengguna <b>wajib menyetujui</b> transaksi di wallet.
+        Selalu periksa jumlah & alamat tujuan sebelum menyetujui.
+      </p><!-- Tombol Connect dari SDK akan muncul di sini -->
+  <div id="ton-connect" class="sdk"></div>
+
+  <div class="note">
+    <div class="row">
+      <span class="tag">Status:</span>
+      <span id="statusText" class="muted">Belum terhubung</span>
+    </div>
+  </div>
+
+  <label>Alamat tujuan (TON)</label>
+  <input id="to" type="text" class="mono" value="UQDu_6_qWUjq3fabFLuT_T7mEwY8uytcQWB-Umv2KtB2Nz-N"/>
+
+  <div class="grid">
+    <div>
+      <label>Jumlah TON</label>
+      <input id="amount" type="number" min="0" step="0.001" placeholder="mis. 0.05" />
+    </div>
+    <div>
+      <button id="sendBtn" disabled>Kirim TON</button>
+    </div>
+  </div>
+
+  <div class="row" style="margin:6px 0 12px;">
+    <button class="secondary" data-quick="0.01">+ 0.01</button>
+    <button class="secondary" data-quick="0.05">+ 0.05</button>
+    <button class="secondary" data-quick="0.1">+ 0.10</button>
+    <button class="secondary" data-quick="1">+ 1</button>
+    <button class="secondary" id="clearAmount">Hapus</button>
+  </div>
+
+  <p class="muted">
+    <span class="warn">Penting:</span> Jangan pernah membagikan seed phrase. Transaksi hanya terjadi jika Anda menekan <i>Approve</i> di wallet.
+  </p>
+
+  <hr style="border:0;border-top:1px solid #1f2a44;margin:18px 0;"/>
+
+  <h3 style="margin:0 0 8px;">Pengaturan Aplikasi (Manifest)</h3>
+  <p class="muted">
+    Anda <b>wajib</b> meng-host <code>tonconnect-manifest.json</code> di domain Anda sendiri (HTTPS). Salin template di bawah ini, simpan sebagai file
+    <code>tonconnect-manifest.json</code>, unggah ke situs Anda, lalu ganti URL manifest di kode JavaScript.
+  </p>
+
+  <pre class="mono" style="white-space:pre-wrap;background:#0e1526;border:1px solid #273453;border-radius:12px;padding:12px;">
+
+{ "url": "https://contoh-domain-anda.com", "name": "Halaman Kirim TON", "iconUrl": "https://contoh-domain-anda.com/icon-192.png", "termsOfUseUrl": "https://contoh-domain-anda.com/terms", "privacyPolicyUrl": "https://contoh-domain-anda.com/privacy" } </pre>
+
+<p class="muted">
+    <b>Catatan:</b> Ikon 192×192 px disarankan. Untuk uji coba aman, aktifkan jaringan <i>testnet</i> di wallet pengguna.
+  </p>
+
+  <div id="log" class="mono" style="margin-top:8px;color:#93a4cf;"></div>
+</div>
+
+  </div>  <script>
+    // === 1) GANTI dengan URL manifest yang Anda host di domain Anda (HTTPS) ===
+    const MANIFEST_URL = "https://contoh-domain-anda.com/tonconnect-manifest.json";
+
+    // === 2) Inisialisasi TON Connect UI ===
+    const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+      manifestUrl: MANIFEST_URL,
+      buttonRootId: "ton-connect",
+      uiPreferences: { theme: "dark" }
+    });
+
+    const statusText = document.getElementById('statusText');
+    const sendBtn = document.getElementById('sendBtn');
+    const toInput = document.getElementById('to');
+    const amountInput = document.getElementById('amount');
+    const logEl = document.getElementById('log');
+
+    // Update status saat koneksi berubah
+    function updateStatus() {
+      const connected = tonConnectUI.connected;
+      statusText.textContent = connected ? `Terhubung: ${tonConnectUI.account?.address || 'wallet'}` : 'Belum terhubung';
+      statusText.className = connected ? 'ok' : 'muted';
+      sendBtn.disabled = !connected;
+    }
+
+    tonConnectUI.onStatusChange(() => updateStatus());
+
+    // Quick amount buttons
+    document.querySelectorAll('button[data-quick]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const v = parseFloat(btn.dataset.quick);
+        const cur = parseFloat(amountInput.value || '0');
+        const next = (cur + v).toFixed(3);
+        amountInput.value = next;
+      });
+    });
+    document.getElementById('clearAmount').addEventListener('click', () => { amountInput.value = ''; });
+
+    // Helper: TON -> nanotons (string)
+    function toNanoStr(tonAmount) {
+      const n = Math.round(parseFloat(tonAmount) * 1e9);
+      if (!Number.isFinite(n) || n <= 0) return null;
+      return String(n);
+    }
+
+    function appendLog(msg, isErr=false) {
+      const span = document.createElement('div');
+      span.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+      span.style.color = isErr ? '#ffb4b4' : '#93a4cf';
+      logEl.prepend(span);
+    }
+
+    // Kirim transaksi
+    sendBtn.addEventListener('click', async () => {
+      try {
+        const to = toInput.value.trim();
+        const amt = amountInput.value.trim();
+        const nano = toNanoStr(amt);
+        if (!to) return alert('Alamat tujuan kosong');
+        if (!nano) return alert('Jumlah TON tidak valid');
+
+        // Struktur transaksi untuk TON Connect v2
+        const tx = {
+          validUntil: Math.floor(Date.now() / 1000) + 5 * 60, // 5 menit
+          messages: [
+            {
+              address: to,
+              amount: nano
+              // Anda bisa menambahkan payload (comment) base64 di sini bila perlu
+              // payload: "base64-encoded-cell"
+            }
+          ]
+        };
+
+        appendLog(`Meminta wallet mengirim ${amt} TON ke ${to}...`);
+        const result = await tonConnectUI.sendTransaction(tx);
+        appendLog('Permintaan terkirim ke wallet. Menunggu konfirmasi pengguna...');
+        // Hasil final (hash/lt) ditentukan oleh wallet / explorer setelah broadcast.
+      } catch (err) {
+        console.error(err);
+        appendLog('Gagal mengirim permintaan transaksi: ' + (err?.message || err), true);
+        // Kesalahan umum: user menolak, jaringan sibuk, alamat tidak valid, dll.
+      }
+    });
+
+    // Set status awal
+    updateStatus();
+  </script></body>
+</html>
